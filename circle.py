@@ -115,9 +115,8 @@ h = h_input
 h = Flatten()(h)
 h = Dense(nTotalCells,kernel_regularizer=l2regul)(h)
 h = Reshape((1,nTotalCells,1))(h)
-h = Conv2D(zdim,kernel_size=(1,1),kernel_regularizer=l2regul)(h)
-h = Activation('relu')(h)
-h = Conv2D(1,kernel_size=(1,1),kernel_regularizer=l2regul)(h)
+h = Conv2D(zdim,kernel_size=(1,1),kernel_regularizer=l2regul,activation="relu")(h)
+h = Conv2D(   1,kernel_size=(1,1),kernel_regularizer=l2regul)(h)
 h = Activation('sigmoid')(h)
 h = Flatten()(h) # 出力は1次元
 h_output = h
@@ -137,12 +136,8 @@ h = Concatenate()([h_act,h_obs])
 #h = Activation('relu')(h)
 #h = Conv2D(zdim,kernel_size=(1,1))(h)
 #h = Flatten()(h)
-h = Dense(16,kernel_regularizer=l2regul)(h)
-h = BatchNormalization()(h)
-h = Activation('relu')(h)
-h = Dense(16,kernel_regularizer=l2regul)(h)
-h = BatchNormalization()(h)
-h = Activation('relu')(h)
+h = Dense(16,kernel_regularizer=l2regul,activation="relu")(h)
+h = Dense(16,kernel_regularizer=l2regul,activation="relu")(h)
 h = Dense(1,kernel_regularizer=l2regul)(h)
 h_output = h
 
